@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+   <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+    
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: new google.maps.LatLng(41.85,-87.6),
+          mapTypeId: 'terrain'
+        });
+
+        // Create a <script> tag and set the USGS URL as the source.
+        var script = document.createElement('script');
+        // This example uses a local copy of the GeoJSON stored at
+        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+        //JSON.parse('https://data.cityofchicago.org/resource/5qvk-gt8i.json')
+        //https://data.cityofchicago.org/resource/5qvk-gt8i.geojson
+        script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+      }
+      
+
+      // Loop through the results array and place a marker for each
+      // set of coordinates.
+      window.eqfeed_callback = function(results) {
+        //for (var i = 0; i < results.features.length; i++) {
+         // var coords = results.features[i].geometry.coordinates;
+          var myLats = [41.779286, 41.752629293489285, 41.98611938850496, 41.7563743554102, 41.793645091444645, 41.793614646148406, 41.83595801848586, 42.00025951144952, 41.80365647472294, 41.866257378192785, 41.962596548691735, 41.9459625867886, 41.87358141810132, 41.96231378868856, 41.96924714863934];
+          var myLngs = [ -87.616054, -87.68276525603093, -87.7877408267013, -87.6338165847716, -87.6578607639445, -87.7041703550325, -87.66879026653764, -87.68980290863908, -87.72101713004055, -87.72687882014701, -87.65551767517252, -87.68838396394528, -87.7647619684764, -87.68856455418805, -87.76401945149458];
+          for(var i = 0; i < myLats.length; i++){
+            var latLng = new google.maps.LatLng(myLats[i], myLngs[i]);
+            var marker = new google.maps.Marker({
+            position: latLng,
+            map: map
+          });
+          }
+          
+        //}
+      }
+      
+    </script>
+    <!--
+    <script>
+       $(document).ready(function() {
+        $.ajax({
+            //url:"https://data.cityofchicago.org/resource/cwig-ma7x.json",
+            url:"https://data.cityofchicago.org/resource/5qvk-gt8i.json",
+            success: function(result) {
+              for (var i=0; i<result.length; i++){
+                  var coords = result[i]['location']['coordinates'];
+                  var latLng = new google.maps.LatLng(41.779286, -87.616054);
+                  var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map
+                  });
+              }
+            }
+        });
+      });
+    </script>
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSjBjkrtWO62JOlermxfIKDM98Vpc2JR8&callback=initMap">
+    </script>
+  </body>
+</html>
+
+
+
+
+
+<!----------------------------------------------------------------------------------------
+EVERYTHING UNDER THIS POINT CAN BE IGNORED
+----------------------------------------------------------------------------------------->
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    
+    
+    <div id="map"></div>
+    
+    
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: new google.maps.LatLng(41.85,-87.6),
+          mapTypeId: 'terrain'
+        });
+        
+        /*$(document).ready(function() {
+        $.ajax({
+            //url:"https://data.cityofchicago.org/resource/cwig-ma7x.json",
+            url:"https://data.cityofchicago.org/resource/5qvk-gt8i.json",
+            success: function(result) {
+              for (var i=0; i<result.length; i++){
+                  var coords = result[i]['location']['coordinates'];
+                  var latLng = new google.maps.LatLng(coords[1],coords[0]);
+                  var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map
+                  });
+              }
+            }
+        });
+      });*/
+      
+      
+        // Create a <script> tag and set the USGS URL as the source.
+        var script = document.createElement('script');
+        // This example uses a local copy of the GeoJSON stored at
+        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+
+        script.src = JSON.parse('https://data.cityofchicago.org/resource/5qvk-gt8i.json');
+        document.getElementsByTagName('head')[0].appendChild(script);
+      }
+
+      // Loop through the results array and place a marker for each
+      // set of coordinates.
+      window = function(results) {
+        //for (var i = 0; i < results.features.length; i++) {
+          //var latLng = new google.maps.LatLng(results[i].latitude, results[i].position.longitude);
+          var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(41.779286, -87.616054),
+            map: map
+          });
+        //}
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSjBjkrtWO62JOlermxfIKDM98Vpc2JR8&callback=initMap">
+    </script>
+    
+  </body>
+</html>
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: new google.maps.LatLng(41.85,-87.6),
+          mapTypeId: 'terrain'
+        });
+
+        // Create a <script> tag and set the USGS URL as the source.
+        var script = document.createElement('script');
+        // This example uses a local copy of the GeoJSON stored at
+        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+        script.src = 'https://data.cityofchicago.org/resource/5qvk-gt8i.json';
+        document.getElementsByTagName('head')[0].appendChild(script);
+      }
+
+      // Loop through the results array and place a marker for each
+      // set of coordinates.
+      
+      //put in the coords manually
+      
+      
+      /*
+      $(document).ready(function() {
+        $.ajax({
+            //url:"https://data.cityofchicago.org/resource/cwig-ma7x.json",
+            url:"https://data.cityofchicago.org/resource/5qvk-gt8i.json",
+            success: function(result) {
+              for (var i=0; i<result.length; i++){
+                  var coords = result[i]['location']['coordinates'];
+                  var latLng = new google.maps.LatLng(coords[1],coords[0]);
+                  var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map
+                  });
+              }
+            }
+        });
+      });
+      */
+      
+      window.eqfeed_callback = function(results) {
+        for (var i = 0; i < results.length; i++) {
+          var latLng = new google.maps.LatLng(results[i].latitude,longitude);
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map
+          });
+        }
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSjBjkrtWO62JOlermxfIKDM98Vpc2JR8&callback=initMap">
+    </script>
+  </body>
+</html>

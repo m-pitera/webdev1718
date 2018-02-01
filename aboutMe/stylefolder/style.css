@@ -1,0 +1,67 @@
+#body1{
+	background-image: url(https://cdn.discordapp.com/attachments/263876699999961089/365492482244608008/lord_buddha2.jpg);
+	background-size: cover;
+}
+#body2{
+	background-image: url(https://i.imgur.com/mx39L0s.png);
+	background-size: cover;
+}
+#body3{
+	background-image: url(https://cdn.discordapp.com/attachments/263876699999961089/365492482244608008/lord_buddha2.jpg);
+	background-size: cover;
+}
+
+.img-border{
+    border-radius: 15px;
+    border-width: 2px;
+	border-color:green;
+    border-style: solid;
+}
+#zen{
+	height:320px;
+	width:380px;
+	display: block;
+	margin-left: 32%;
+	margin-right: 68%;
+	margin-top: 80px;
+}
+#winston{
+	margin-left: 90px;
+	margin-right: 300px;
+}
+#bad-winston{
+	
+}
+.big-text{
+	text-align: center;
+	font-size= 80px;
+}
+#zen-text{
+	font: italic 60px "Open Sans", serif;
+	color: red;
+	/*display: block;
+	margin-left: 32%;
+	margin-right: 68%;
+	margin-top: 0px;*/
+}
+#winston-text{
+	font: bold 50px "Courier", monospace;
+	color: blue;
+}
+
+h3{
+	color: orange;
+}
+#links{
+	text-align: right;
+	margin-right: 0px;
+	font: italic small-caps bold 30px cursive;
+}
+#someText{
+	font: italic small-caps bold 15px cursive;
+	color: red;
+}
+nav ul {
+	list-style: none;
+
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title> </title>
+        <!--<link rel = "stylesheet" href = "style.css">-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+            u.underline {text-decoration: underline;}
+            h1{color:#0277bb;/*76C9CA*/}
+            img {float: left;}
+            body{background-color: #00BCD5}
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                transition: 0.3s;
+                width: 40%;
+                border-radius: 5px;
+            }
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            }
+            
+            .gaben {
+                border-radius: 5px 5px 0 0;
+            }
+            .container {
+                padding: 2px 16px;
+            }
+        </style>
+        <script>
+        var url = "https://data.cityofchicago.org/resource/tt4n-kn4t.json";
+
+        $(document).ready(function() {
+            $.getJSON(url).done (function (data) {
+                console.log(data);
+                var trHTML = '';
+                /*
+                $.each(data, function (i, value) {
+                    trHTML += '<tr><td>' + data.department[i] + '</td><td>' + data.Cities[i] + '</td></tr>';
+                });
+                $('#theTable').append(trHTML);
+                */
+                for (var i=0; i<data.length; i++){
+                    $("#theTable").append(
+                        "<tr> <td>"+data[i]['department']+"</td> <td>"+data[i]['job_titles']+"</td> <td>"+data[i]['annual_salary']+"</td> <td>"+data[i]['full_or_part_time']+"</td>"
+                        );
+                    }
+            });
+        });
+
+        </script>
+    </head>
+    <body background-color: #00BCD5>
+        
+        <h1><u class="underline">Marcin Pitera</u></h1>
+        <h3><i>Period 1</i></h3>
+        
+        <hr>
+        
+        <p><img src="eragon_novel.jpg" alt="Book" style="width:139.5px;height:203px;margin-right:15px;">WOW, has this book got a story to tell, here is what you need to know about this book: lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis diam velit. IN CONCLUSION, this book was pretty decent.</p>
+        
+        <hr>
+        
+        <a href="../aboutMe/aboutme.html" class="btn btn-info" role="button">Button to the Past 0 _ 0</a>
+        <p></p>
+        <p></p>
+        <!--
+        <div class="card">
+            <img class="gaben "src="lord_gaben.jpg" alt="The Lord Himself" style="width:200px;height:276.75">
+            <div class="container">
+                <h4><b>Lord Gaben</b></h4>
+                <a href = "https://en.wikipedia.org/wiki/Gabe_Newell" title = "His Story">The Story of Our Savior</a>
+                <p></p> 
+            </div>
+        </div>
+        -->
+        <div class="card" style="width: 20rem;">
+          <img class="card-img-top" src="lord_gaben.jpg" alt="The Lord Himself" style="width:200px;height:276.75">
+          <div class="card-block">
+            <h4 class="card-title">Lord Gaben</h4>
+            <p class="card-text">May he bless us with discounts for many years to come!</p>
+            <a href="https://en.wikipedia.org/wiki/Gabe_Newell" class="btn btn-primary">The Story of Our Savior</a>
+          </div>
+        </div>
+        
+        <hr>
+        
+        <table id="theTable" border='1'>
+            <tr>
+                <th>Department</th>
+                <th>Job Title</th> 
+                <th>Annual Salary</th>
+                <th>Full Time or Part Time</th>
+            </tr>
+        </table>
+        
+    </body>
+</html>

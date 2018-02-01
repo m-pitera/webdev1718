@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+    </head>
+    <body>
+        <!--1500 x 700 fills up most of the page-->
+        <canvas id="myCanvas" width="400" height="400" style="border:6px solid #c3c3c3;">
+        
+        </canvas>
+        <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        
+        //The "M"
+        ctx.fillStyle = "#66CC01";
+        ctx.fillRect(65, 40, 15, 80);
+        ctx.rotate(-45 * Math.PI / 180);
+        ctx.fillRect(20, 70, 15, 80);
+        ctx.rotate(90 * Math.PI / 180);
+        ctx.fillRect(135, -100, 15, 80);
+        ctx.resetTransform();
+        ctx.fillRect(160, 40, 15, 80);
+        
+        //The "P"
+        ctx.fillRect(210, 23, 15, 97);
+        ctx.beginPath();
+        ctx.arc(225, 60, 32, 3 * Math.PI / 2,Math.PI / 2, false);
+        ctx.fillStyle = "#E2FFC6";
+        ctx.fill();
+ 
+        // draw the stroke
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = "#66CC01";
+        ctx.stroke();
+        //ctx.arc(210, 40,-90*Math.PI/180, 90*Math.PI/180)
+        
+        
+        
+        // Circle
+        //ctx.beginPath();
+        //ctx.arc(200, 200, 93, 0, 2 * Math.PI, true);
+        //ctx.fillStyle = "#FF6A6A";
+        //ctx.fill();
+        
+        //ctx.rotate(360 * Math.PI / 180);
+        // Transform
+        //ctx.translate(200, 200);
+        //ctx.rotate(90 * Math.PI / 180);
+        // Text
+        
+        /*
+        ctx.font = "bold 48px Helvetica, Arial, sans-serif";
+        ctx.fillStyle = "steelblue";
+        ctx.fillText("Wheeeee!", 150, 0);
+
+        
+        ctx.resetTransform();
+        // Square
+        ctx.fillStyle = "#00CCFF";
+        ctx.fillRect(50, 50, 100, 100);
+        */
+        </script>
+    </body>
+</html>
