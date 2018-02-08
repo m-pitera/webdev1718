@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+    </head>
+    <body>
+        <!--1500 x 700 fills up most of the page-->
+        <canvas id="myCanvas" width="400" height="400" style="border:6px solid #c3c3c3;">
+        
+        </canvas>
+        <script>
+        var xPos = -100;
+        var yPos = 0;
+        var iSizeX = 250;
+        var iSizeX = 250;
+
+        
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        
+        //var canvasWidth = canvas.width;
+        //var canvasHeight = canvas.height;
+        
+        function drawInitials(){
+            //The "M"
+            ctx.fillStyle = "#66CC01";
+            ctx.fillRect(xPos,yPos+ 40, 15, 80);
+            ctx.rotate(-45 * Math.PI / 180);
+            ctx.fillRect(xPos, yPos + 70, 15, 80);
+            ctx.rotate(90 * Math.PI / 180);
+            ctx.fillRect(xPos,yPos + -100, 15, 80);
+            ctx.resetTransform();
+            ctx.fillRect(xPos, yPos + 40, 15, 80);
+            
+            //The "P"
+            ctx.fillRect(xPos, yPos + 23, 15, 97);
+            ctx.beginPath();
+            ctx.arc(xPos, yPos + 60, 32, 3 * Math.PI / 2,Math.PI / 2, false);
+            ctx.fillStyle = "#E2FFC6";
+            ctx.fill();
+     
+            // draw the stroke
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = "#66CC01";
+            ctx.stroke();
+            
+            xPos += 5;
+            
+            if (xPos > 400) {
+                xPos = -200;
+            }
+        }
+        requestAnimationFrame(drawInitials());
+
+        
+        /*
+        var xPos = -500;
+ 
+        function drawCircle() {
+          ctx.clearRect(0, 0, 500, canvasHeight);
+         
+          // color in the background
+          ctx.fillStyle = "#F8F8F8";
+          ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+         
+          // draw the circle
+          ctx.beginPath();
+          ctx.arc(xPos, 225, 175, 0, Math.PI * 2, false);
+          ctx.closePath();
+         
+          ctx.fillStyle = "#FFCC00";
+          ctx.fill();
+         
+          ctx.lineWidth = 10;
+          ctx.strokeStyle = "#DCB001";
+          ctx.stroke();
+         
+          xPos += 5;
+         
+          if (xPos > 1000) {
+            xPos = -500;
+          }
+         
+          requestAnimationFrame(drawCircle);
+        }*/
+
+        </script>
+    </body>
+</html>
