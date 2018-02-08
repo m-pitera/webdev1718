@@ -10,7 +10,7 @@
         </canvas>
         <script>
         var xPos = -100;
-        var yPos = 0;
+        //var yPos = 0;
         var iSizeX = 250;
         var iSizeX = 250;
 
@@ -24,18 +24,18 @@
         function drawInitials(){
             //The "M"
             ctx.fillStyle = "#66CC01";
-            ctx.fillRect(xPos,yPos+ 40, 15, 80);
+            ctx.fillRect(xPos + 65, 40, 15, 80);
             ctx.rotate(-45 * Math.PI / 180);
-            ctx.fillRect(xPos, yPos + 70, 15, 80);
+            ctx.fillRect(xPos + 20,   70, 15, 80);
             ctx.rotate(90 * Math.PI / 180);
-            ctx.fillRect(xPos,yPos + -100, 15, 80);
+            ctx.fillRect(xPos + 135,  -100, 15, 80);
             ctx.resetTransform();
-            ctx.fillRect(xPos, yPos + 40, 15, 80);
+            ctx.fillRect(xPos + 160,   40, 15, 80);
             
             //The "P"
-            ctx.fillRect(xPos, yPos + 23, 15, 97);
+            ctx.fillRect(xPos + 210,   23, 15, 97);
             ctx.beginPath();
-            ctx.arc(xPos, yPos + 60, 32, 3 * Math.PI / 2,Math.PI / 2, false);
+            ctx.arc(xPos + 225,  60, 32, 3 * Math.PI / 2,Math.PI / 2, false);
             ctx.fillStyle = "#E2FFC6";
             ctx.fill();
      
@@ -43,15 +43,18 @@
             ctx.lineWidth = 10;
             ctx.strokeStyle = "#66CC01";
             ctx.stroke();
+            //ctx.clearRect(0, 0, 400, 400);
             
             xPos += 5;
             
             if (xPos > 400) {
                 xPos = -200;
             }
+            
+            requestAnimationFrame(drawInitials);
         }
-        requestAnimationFrame(drawInitials());
-
+        
+        drawInitials();
         
         /*
         var xPos = -500;
