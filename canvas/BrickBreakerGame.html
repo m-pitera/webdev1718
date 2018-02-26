@@ -44,6 +44,9 @@
             var brickOffsetTop = 30;
             var brickOffsetLeft = 30;
             var brickColor = "blue";
+            
+            //miscellaneous vals
+            var counter = 0;
             var score = 0;
             var lives = 3;
             
@@ -106,15 +109,22 @@
             }
             
             function draw(){
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                counter ++;
+                if (counter % 5 == 0){
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+                
                 // Create gradient
                 var grd = ctx.createRadialGradient(75,50,5,90,60,100);
                 grd.addColorStop(0,getRandomColor());
                 grd.addColorStop(1,getRandomColor());
                 
                 // Fill with gradient
-                ctx.fillStyle = grd;
-                ctx.fillRect(10,10,150,80);
+                if (counter % 20 == 0){
+                    ctx.fillStyle = grd;
+                    ctx.fillRect(0,0,480,320);
+                }
+                
                 
                 drawBricks();
                 drawBall();
