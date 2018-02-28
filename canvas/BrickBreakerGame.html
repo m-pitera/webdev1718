@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <canvas id="myCanvas" width="480" height="320" style="border:6px solid #c3c3c3; margin: 0 auto; display: block; background: #eee">
+        <canvas id="myCanvas" width="960" height="640" style="border:6px solid #c3c3c3; margin: 0 auto; display: block; background: #eee">
         </canvas>
         <script>
         
@@ -36,8 +36,8 @@
             
             //brick vals
             var bricks = [];
-            var brickRowCount = 3;
-            var brickColumnCount = 5;
+            var brickRowCount = 9;
+            var brickColumnCount = 15;
             var brickWidth = 75;
             var brickHeight = 20;
             var brickPadding = 10;
@@ -46,7 +46,8 @@
             var brickColor = "blue";
             
             //miscellaneous vals
-            var counter = 0;
+            var frameCounter = 0;
+            var counter2 = 0;
             var score = 0;
             var lives = 3;
             
@@ -109,8 +110,8 @@
             }
             
             function draw(){
-                counter ++;
-                if (counter % 5 == 0){
+                frameCounter ++;
+                if (frameCounter % 5 == 0){
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                 }
                 
@@ -120,9 +121,9 @@
                 grd.addColorStop(1,getRandomColor());
                 
                 // Fill with gradient
-                if (counter % 20 == 0){
+                if (frameCounter % 20 == 0){
                     ctx.fillStyle = grd;
-                    ctx.fillRect(0,0,480,320);
+                    ctx.fillRect(0,0,960,640);
                 }
                 
                 
@@ -144,7 +145,7 @@
                 	}else{
                 	    lives--;
                 	    if (lives == 0){
-                    		alert("GAME OVER");
+                    		//alert("GAME OVER");
                     		x = canvas.width/2;
                             y = canvas.height - 30;
                             dx = 2;
