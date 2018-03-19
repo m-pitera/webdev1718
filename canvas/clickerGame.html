@@ -7,11 +7,7 @@
 
 <body>
     <canvas onclick="theGame(event)" id="myCanvas" width="800" height="800" style="border:6px solid #c3c3c3; margin: 0 auto; display: block; background: #eee"></canvas>
-    <!--<div style="display:none;">
-        <img id="imgOne" src="https://images.sailrite.com/Product%20Images/Needles-Hand-Sewing-14_1.jpg?resizeid=3"></img>
-        <img id="imgTwo" src="https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4290547.jpg"></img>
-        <img id="imgThree" src="https://www.octopai.com/wp-content/uploads/2017/05/pexels-photo-491758-815x457.jpeg"></img>
-    </div>-->
+
     <img id="imgOne" width="40" height="40" src="https://images.sailrite.com/Product%20Images/Needles-Hand-Sewing-14_1.jpg?resizeid=3"></img>
     <img id="imgTwo" src="https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4290547.jpg"></img>
     <img id="imgThree" src="https://www.octopai.com/wp-content/uploads/2017/05/pexels-photo-491758-815x457.jpeg"></img>
@@ -39,19 +35,6 @@
         ctx.drawImage(img1, posX, posY, 40, 40);
         drawLives();
         drawScore();
-        //ctx.drawImage(img1, 0, 0);
-        /*Used for troubleshooting
-        ctx.beginPath();
-        ctx.arc(105, 60, 40, 0, 1 * Math.PI);
-        ctx.stroke();
-        */
-
-        //ctx.drawImage(img3, 0, 0);
-
-        /*function drawSquare() {
-            ctx.fillStyle = "#000000";
-            ctx.fillRect(posX, posY, 20, 20);
-        }*/
 
         function randomPos() {
             posX = Math.random() * 800;
@@ -85,9 +68,9 @@
             mouseY = event.clientY;
             console.log(" mouseX: " + mouseX + "\n mouseY: " + mouseY + "\n posX: " + posX + "\n posY: " + posY);
 
-            //(mouseX>posX && mouseX<posX+100 && mouseY>posY && mouseY<posY+100){
+            //(mouseX>posX && mouseX<posX+40 && mouseY>posY && mouseY<posY+40){
             //(mouseX >= posX && mouseX <= posX + 40 && mouseY >= posY && mouseY <= posY + 40) {
-            if (mouseX > posX && mouseX < posX + 40 && mouseY > posY && mouseY < posY + 40) {
+            if (mouseX > posX && mouseX < posX + 100 && mouseY > posY && mouseY < posY + 100) {
                 console.log("is Clicked");
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(img2, 0, 0, 800, 800);
@@ -102,7 +85,7 @@
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(img2, 0, 0, 800, 800);
                 lives--;
-                randomPos();
+                //randomPos();
                 drawLives();
                 drawScore();
                 ctx.drawImage(img1, posX, posY, 40, 40);
