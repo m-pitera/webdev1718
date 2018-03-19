@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <canvas onclick="theGame(event)" id="myCanvas" width="800" height="800" style="border:6px solid #c3c3c3; margin: 0 auto; display: block; background: #eee"></canvas>
+    <!--<div style="display:none;">
+        <img id="imgOne" src="https://images.sailrite.com/Product%20Images/Needles-Hand-Sewing-14_1.jpg?resizeid=3"></img>
+        <img id="imgTwo" src="https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4290547.jpg"></img>
+        <img id="imgThree" src="https://www.octopai.com/wp-content/uploads/2017/05/pexels-photo-491758-815x457.jpeg"></img>
+    </div>-->
+    <img id="imgOne" src="https://images.sailrite.com/Product%20Images/Needles-Hand-Sewing-14_1.jpg?resizeid=3"></img>
+    <img id="imgTwo" src="https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4290547.jpg"></img>
+    <img id="imgThree" src="https://www.octopai.com/wp-content/uploads/2017/05/pexels-photo-491758-815x457.jpeg"></img>
+
+
+    <script>
+        var img1 = document.getElementById('imgOne');
+        img1.style.visibility = 'hidden';
+        var img2 = document.getElementById('imgTwo');
+        img2.style.visibility = 'hidden';
+        var img3 = document.getElementById('imgThree');
+        img3.style.visibility = 'hidden';
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+
+        var posX = 0;
+        var posY = 0;
+        var mouseX = 0;
+        var mouseY = 0;
+        var score = 0;
+        var lives = 3;
+
+        randomPos();
+        ctx.drawImage(img2, 0, 0, 800, 800);
+        ctx.drawImage(img1, posX, posY, 40, 40);
+        drawLives();
+        drawScore();
+        //ctx.drawImage(img1, 0, 0);
+        /*Used for troubleshooting
+        ctx.beginPath();
+        ctx.arc(105, 60, 40, 0, 1 * Math.PI);
+        ctx.stroke();
+        */
+
+        //ctx.drawImage(img3, 0, 0);
+
+        /*function drawSquare() {
+            ctx.fillStyle = "#000000";
+            ctx.fillRect(posX, posY, 20, 20);
+        }*/
+
+        function randomPos() {
+            posX = Math.random() * 800;
+            posY = Math.random() * 800;
+        }
+
+        function drawScore() {
+            ctx.font = "32px Arial";
+            ctx.fillStyle = "red";
+            ctx.fillText("Score: " + score, 8, 30);
+        }
+
+        function drawLives() {
+            ctx.font = "32px Arial";
+            ctx.fillStyle = "red";
+            ctx.fillText("Lives: " + lives, 400, 30);
+        }
+
+        function theGame(event) {
+
+            if (score == 20 && lives == 3) {
+                alert("Perfect Game!");
+                document.location.reload();
+            }
+            else if (score == 20) {
+                alert("You Won!");
+                document.location.reload();
+            }
+
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+
+            //(mouseX>posX && mouseX<posX+100 && mouseY>posY && mouseY<posY+100){
+            //(mouseX >= posX && mouseX <= posX + 40 && mouseY >= posY && mouseY <= posY + 40) {
+            if (mouseX > posX && mouseX < posX + 100 && mouseY > posY && mouseY < posY + 100) {
+                console.log("is Clicked");
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img2, 0, 0, 800, 800);
+                score++;
+                randomPos();
+                drawLives();
+                drawScore();
+                ctx.drawImage(img1, posX, posY, 40, 40);
+
+            }
+            else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img2, 0, 0, 800, 800);
+                lives--;
+                randomPos();
+                drawLives();
+                drawScore();
+                ctx.drawImage(img1, posX, posY, 40, 40);
+                if (lives == 0) {
+                    alert("Game Over");
+                    document.location.reload();
+                }
+            }
+        }
+
+        /*
+        function myFunction(event){
+                var xpos=event.clientX;
+                var ypos=event.clientY;
+                if (xpos>=randx && xpos<=randx+50 && ypos>=randy && ypos<=randy+50){
+                    ctx.clearRect(0, 0, 500, 500);
+                    ctx.drawImage(imageObj2, 0, 0);
+                    score++;
+                    ctx.fillText("Score: "+score, 430, 30);
+                    ctx.fillText("Lives: "+lives, 60, 30);
+                    randx=Math.random()*450;
+                    randy=Math.random()*450;
+                    ctx.drawImage(imageObj, randx, randy);
+                } else if (xpos>=0 && xpos<=10 && ypos>=490){
+                    alert("You found my secret..");
+                } else {
+                    ctx.clearRect(0, 0, 500, 500);
+                    ctx.drawImage(imageObj2, 0, 0);
+                    lives--;
+                    ctx.fillText("Score: "+score, 430, 30);
+                    ctx.fillText("Lives: "+lives, 60, 30);
+                    randx=Math.random()*450;
+                    randy=Math.random()*450;
+                    ctx.drawImage(imageObj, randx, randy);
+                    if (lives==0){
+                        alert("Game Over");
+                        location.reload();
+                    }
+                }
+                if (score==20 && lives==3){
+                    alert("Perfect Game!");
+                    location.reload();
+                } else if (score==20){
+                    alert("You Won!");
+                    location.reload();
+                }
+            }
+        */
+    </script>
+</body>
+
+</html>

@@ -1,245 +1,252 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title> </title>
-        <style>
-        *{
+
+<head>
+    <title> </title>
+    <style>
+        * {
             margin: 0;
             padding: 0;
         }
-        </style>
-    </head>
-    <body>
-        <canvas id="myCanvas" width="960" height="640" style="border:6px solid #c3c3c3; margin: 0 auto; display: block; background: #eee">
-        </canvas>
-        <script>
-        
-        alert("Epilepsy Warning"); 
-        var canvas = document. getElementById("myCanvas");
-            var ctx = canvas.getContext("2d");
-            document.addEventListener("keydown", keyDownHandler, false);
-            document.addEventListener("keyup", keyUpHandler, false);
-            
-            //ball values
-            var x = canvas.width/2;
-            var y = canvas.height - 30;
-            var dx = 2;
-            var dy = -2;
-            var ballRadius = 10;
-            
-            //paddle vals
-            var paddleHeight = 10;
-            var paddleWidth = 150;
-            var paddleX = (canvas.width - paddleWidth)/2;
-            var rightPressed = false;
-            var leftPressed = false;
-            
-            //brick vals
-            var bricks = [];
-            var brickRowCount = 9;
-            var brickColumnCount = 15;
-            var brickWidth = 75;
-            var brickHeight = 20;
-            var brickPadding = 10;
-            var brickOffsetTop = 30;
-            var brickOffsetLeft = 30;
-            var brickColor = "blue";
-            
-            //miscellaneous vals
-            var frameCounter = 0;
-            var counter2 = 0;
-            var score = 0;
-            var lives = 3;
-            
-            
-            //makes sum bricks
-            for(var c = 0; c < brickColumnCount; c++){
-            	bricks[c] = [];
-            	for(var r = 0; r < brickRowCount; r++){
-            		bricks[c][r] = { x:0, y:0, status:1 };
-            	}
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="960" height="640" style="border:6px solid #c3c3c3; margin: 0 auto; display: block; background: #eee"></canvas>
+    <script>
+        alert("Epilepsy Warning");
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        document.addEventListener("keydown", keyDownHandler, false);
+        document.addEventListener("keyup", keyUpHandler, false);
+
+        //ball values
+        var x = canvas.width / 2;
+        var y = canvas.height - 30;
+        var dx = 2;
+        var dy = -2;
+        var ballRadius = 10;
+
+        //paddle vals
+        var paddleHeight = 10;
+        var paddleWidth = 150;
+        var paddleX = (canvas.width - paddleWidth) / 2;
+        var rightPressed = false;
+        var leftPressed = false;
+
+        //brick vals
+        var bricks = [];
+        var brickRowCount = 9;
+        var brickColumnCount = 15;
+        var brickWidth = 75;
+        var brickHeight = 20;
+        var brickPadding = 10;
+        var brickOffsetTop = 30;
+        var brickOffsetLeft = 30;
+        var brickColor = "blue";
+
+        //miscellaneous vals
+        var frameCounter = 0;
+        var counter2 = 0;
+        var score = 0;
+        var lives = 3;
+
+
+        //makes sum bricks
+        for (var c = 0; c < brickColumnCount; c++) {
+            bricks[c] = [];
+            for (var r = 0; r < brickRowCount; r++) {
+                bricks[c][r] = { x: 0, y: 0, status: 1 };
             }
-            
-            //do everything
-            setInterval(draw, 10);
-            
-            function drawScore(){
-                ctx.font = "16px Arial";
-            	ctx.fillStyle = "green";
-            	ctx.fillText("Score: " + score, 8, 20);
-            }
-            
-            function drawLives(){
-                ctx.font = "16px Arial";
-            	ctx.fillStyle = "green";
-            	ctx.fillText("Lives: " + lives, 400, 20);
-            }
-            
-            function drawBricks() {
-            	for(var c = 0; c < brickColumnCount; c++){
-            		for(var r = 0; r < brickRowCount; r++){
-            			if(bricks[c][r].status == 1){
-            			    var brickX = (c*(brickWidth + brickPadding)) + brickOffsetLeft;
-                            var brickY = (r*(brickHeight + brickPadding)) + brickOffsetTop;
-                            bricks[c][r].x = brickX;
-                			bricks[c][r].y = brickY;
-                			ctx.beginPath();
-                			ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                			ctx.fillStyle = brickColor;
-                			ctx.fill();
-                			ctx.closePath();
-            		    }
-            		}
-            	}
-            }
-            
-            function drawBall(){
-                ctx.beginPath();
-                ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-                ctx.fillStyle = getRandomColor();
-                ctx.fill();
-                ctx.closePath();
-            }
-            
-            function drawPaddle(){
-                ctx.beginPath();
-            	ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-            	ctx.fillStyle = getRandomColor();
-            	ctx.fill();
-            	ctx.closePath();
-            }
-            
-            function draw(){
-                frameCounter ++;
-                if (frameCounter % 5 == 0){
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                }
-                
-                // Create gradient
-                var grd = ctx.createRadialGradient(75,50,5,90,60,100);
-                grd.addColorStop(0,getRandomColor());
-                grd.addColorStop(1,getRandomColor());
-                
-                // Fill with gradient
-                if (frameCounter % 20 == 0){
-                    ctx.fillStyle = grd;
-                    ctx.fillRect(0,0,960,640);
-                }
-                
-                
-                drawBricks();
-                drawBall();
-                drawPaddle();
-                drawScore();
-                drawLives();
-                x+=dx;
-                y+=dy;
-                if(x + dx > canvas.width - ballRadius || x + dx < ballRadius){
-	                dx = -dx;
-                }
-                if(y + dy < ballRadius){
-                	dy = -dy;
-                } else if(y + dy > canvas.height - ballRadius) {
-                	if(x > paddleX && x < paddleX + paddleWidth) {
-                		dy = -dy;
-                	}else{
-                	    lives--;
-                	    if (lives == 0){
-                    		//alert("GAME OVER");
-                    		x = canvas.width/2;
-                            y = canvas.height - 30;
-                            dx = 2;
-                            dy = -2;
-                            ballRadius = 10;
-                            paddleHeight = 10;
-                            paddleWidth = 150;
-                            paddleX = (canvas.width - paddleWidth)/2;
-                            rightPressed = false;
-                            leftPressed = false;
-                            brickRowCount = 3;
-                            brickColumnCount = 5;
-                            brickWidth = 75;
-                            brickHeight = 20;
-                            brickPadding = 10;
-                            brickOffsetTop = 30;
-                            brickOffsetLeft = 30;
-                            score = 0;
-                            lives = 3;
-    	                    document.location.reload();
-                        }else{
-                    	    x = canvas.width/2;
-                            y = canvas.height - 30;
-                            dx = 2;
-                            dy = -2;
-                            ballRadius = 10;
-                            paddleHeight = 10;
-                            paddleWidth = 150;
-                            paddleX = (canvas.width - paddleWidth)/2;
-                            rightPressed = false;
-                            leftPressed = false;
-                	    }
+        }
+
+        //do everything
+        setInterval(draw, 10);
+
+        function drawScore() {
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "green";
+            ctx.fillText("Score: " + score, 8, 20);
+        }
+
+        function drawLives() {
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "green";
+            ctx.fillText("Lives: " + lives, 400, 20);
+        }
+
+        function drawBricks() {
+            for (var c = 0; c < brickColumnCount; c++) {
+                for (var r = 0; r < brickRowCount; r++) {
+                    if (bricks[c][r].status == 1) {
+                        var brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+                        var brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+                        bricks[c][r].x = brickX;
+                        bricks[c][r].y = brickY;
+                        ctx.beginPath();
+                        ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                        ctx.fillStyle = brickColor;
+                        ctx.fill();
+                        ctx.closePath();
                     }
                 }
-                if(rightPressed && paddleX < canvas.width-paddleWidth){
-                	paddleX += 7;
-                } else if(leftPressed && paddleX > 0){
-                	paddleX -= 7;
+            }
+        }
+
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+            ctx.fillStyle = getRandomColor();
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function drawPaddle() {
+            ctx.beginPath();
+            ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+            ctx.fillStyle = getRandomColor();
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function draw() {
+            frameCounter++;
+            if (frameCounter % 4 == 0) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+
+            // Create gradient
+            var grd = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+            grd.addColorStop(0, getRandomColor());
+            grd.addColorStop(1, getRandomColor());
+
+            // Fill with gradient
+            if (frameCounter % 20 == 0) {
+                ctx.fillStyle = grd;
+                ctx.fillRect(0, 0, 960, 640);
+            }
+
+
+            drawBricks();
+            drawBall();
+            drawPaddle();
+            drawScore();
+            drawLives();
+            x += dx;
+            y += dy;
+            if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+                dx = -dx;
+            }
+            if (y + dy < ballRadius) {
+                dy = -dy;
+            }
+            else if (y + dy > canvas.height - ballRadius) {
+                if (x > paddleX && x < paddleX + paddleWidth) {
+                    dy = -dy;
                 }
-                collisionDetection();
+                else {
+                    lives--;
+                    if (lives == 0) {
+                        //alert("GAME OVER");
+                        x = canvas.width / 2;
+                        y = canvas.height - 30;
+                        dx = 2;
+                        dy = -2;
+                        ballRadius = 10;
+                        paddleHeight = 10;
+                        paddleWidth = 150;
+                        paddleX = (canvas.width - paddleWidth) / 2;
+                        rightPressed = false;
+                        leftPressed = false;
+                        brickRowCount = 3;
+                        brickColumnCount = 5;
+                        brickWidth = 75;
+                        brickHeight = 20;
+                        brickPadding = 10;
+                        brickOffsetTop = 30;
+                        brickOffsetLeft = 30;
+                        score = 0;
+                        lives = 3;
+                        document.location.reload();
+                    }
+                    else {
+                        x = canvas.width / 2;
+                        y = canvas.height - 30;
+                        dx = 2;
+                        dy = -2;
+                        ballRadius = 10;
+                        paddleHeight = 10;
+                        paddleWidth = 150;
+                        paddleX = (canvas.width - paddleWidth) / 2;
+                        rightPressed = false;
+                        leftPressed = false;
+                    }
+                }
             }
-            
-            function collisionDetection() {
-                for(var c = 0; c < brickColumnCount; c++){
-                    for(var r = 0; r < brickRowCount; r++){
-                        var b = bricks[c][r];
-                        if(b.status == 1){
-            				if(x > b.x && x < b.x+brickWidth && y>b.y && y<b.y + brickHeight){
-            				    
-            				    /*if(dy < 0){
-            				        dy = -1(Math.random() * 2.5) - 1;
-            				    }
-            				    else if(dy > 0){
-            				        dy = Math.random() * 2.5 + 1;
-            				    }*/
-            					dy = -dy;
-            					dx = Math.random() * 3 + 1.5;
-            					brickColor = getRandomColor();
-            					b.status = 0;
-            					score++;
-            					if (score == brickRowCount*brickColumnCount){
-            					    alert("YOU WIN"); 
-            					    document.location.reload();
-            					}
-            				}
-            			}
-            		}
-            	}
+            if (rightPressed && paddleX < canvas.width - paddleWidth) {
+                paddleX += 7;
             }
-           
-            function keyDownHandler(e){
-            	if(e.keyCode == 39){
-            		rightPressed = true;
-            	} else if(e.keyCode == 37){
-            		leftPressed = true;
-            	}
+            else if (leftPressed && paddleX > 0) {
+                paddleX -= 7;
             }
-            function keyUpHandler(e){
-            	if(e.keyCode == 39){
-            		rightPressed = false;
-            	} else if(e.keyCode == 37){
-            		leftPressed = false;
-            	}
+            collisionDetection();
+        }
+
+        function collisionDetection() {
+            for (var c = 0; c < brickColumnCount; c++) {
+                for (var r = 0; r < brickRowCount; r++) {
+                    var b = bricks[c][r];
+                    if (b.status == 1) {
+                        if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+
+                            /*if(dy < 0){
+                                dy = -1(Math.random() * 2.5) - 1;
+                            }
+                            else if(dy > 0){
+                                dy = Math.random() * 2.5 + 1;
+                            }*/
+                            dy = -dy;
+                            dx = Math.random() * 3 + 1.5;
+                            brickColor = getRandomColor();
+                            b.status = 0;
+                            score++;
+                            if (score == brickRowCount * brickColumnCount) {
+                                alert("YOU WIN");
+                                document.location.reload();
+                            }
+                        }
+                    }
+                }
             }
-            
-            function getRandomColor() {
-              var letters = '0123456789ABCDEF';
-              var color = '#';
-              for (var i = 0; i < 6; i++) {
+        }
+
+        function keyDownHandler(e) {
+            if (e.keyCode == 39) {
+                rightPressed = true;
+            }
+            else if (e.keyCode == 37) {
+                leftPressed = true;
+            }
+        }
+
+        function keyUpHandler(e) {
+            if (e.keyCode == 39) {
+                rightPressed = false;
+            }
+            else if (e.keyCode == 37) {
+                leftPressed = false;
+            }
+        }
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
                 color += letters[Math.floor(Math.random() * 16)];
-              }
-              return color;
             }
-        
-        </script>
-    </body>
+            return color;
+        }
+    </script>
+</body>
+
 </html>

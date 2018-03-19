@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title> </title>
-    </head>
-    <body>
-        <!--1500 x 700 fills up most of the page-->
-        <canvas id="myCanvas" width="800" height="800" style="border:6px solid #c3c3c3;"  onmouseover="mouseOver()" onmouseenter="setRandomColor()" onclick="clearCanvas()">
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <!--1500 x 700 fills up most of the page-->
+    <canvas id="myCanvas" width="800" height="800" style="border:6px solid #c3c3c3;" onmouseover="mouseOver()" onmouseenter="setRandomColor()" onclick="clearCanvas()">
         
         </canvas>
-        <script>
+    <script>
         var xPos = -100;
         var yPos = -100;
-        
+
         var xPos2 = -100;
         var yPos2 = -100;
-        
+
         var myColor = getRandomColor();
 
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
-        
+
         function mouseOver() {
-            
+
             drawLine();
         }
-        
-        function drawLine(){
+
+        function drawLine() {
             var e = window.event;
 
             var mposX = e.clientX;
             var mposY = e.clientY;
-            
+
             //ctx.beginPath();
-            ctx.arc(xPos2 + mposX, mposY, 32, 3 * Math.PI / 2,Math.PI / 2, false);
+            ctx.arc(xPos2 + mposX, mposY, 32, 3 * Math.PI / 2, Math.PI / 2, false);
             ctx.fillStyle = myColor;
             ctx.fill();
-            
+
             xPos2 += 5;
             requestAnimationFrame(drawLine);
-            
+
             if (xPos2 > 800) {
                 xPos2 = 0 - mposX;
             }
@@ -47,51 +49,51 @@
             }
         }
 
-        function drawGrid(){
+        function drawGrid() {
             //The Grid
             ctx.fillStyle = "#66CC01";
             ctx.fillRect(xPos + 140, 140, 30, 520);
             ctx.fillRect(140, yPos + 140, 520, 40);
-            
+
             //Initial Red
             ctx.beginPath();
-            ctx.arc(xPos + 200,  60, 32, 3 * Math.PI / 2,Math.PI / 2, false);
+            ctx.arc(xPos + 200, 60, 32, 3 * Math.PI / 2, Math.PI / 2, false);
             ctx.fillStyle = "#ff0000";
             ctx.fill();
-            
+
             xPos += 5;
             yPos += 5;
-            
+
             if (xPos > 800) {
                 xPos = -200;
             }
             if (yPos > 800) {
                 yPos = -200;
             }
-            
+
             requestAnimationFrame(drawGrid);
         }
         //drawLine();
         //drawGrid();
-        
+
         function setRandomColor() {
-          myColor = getRandomColor();
+            myColor = getRandomColor();
         }
-        
+
         //this is not my own code
         function getRandomColor() {
-          var letters = '0123456789ABCDEF';
-          var color = '#';
-          for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-          }
-          return color;
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
-        
-        function clearCanvas(){
+
+        function clearCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
-        
-        </script>
-    </body>
+    </script>
+</body>
+
 </html>
