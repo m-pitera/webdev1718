@@ -1,148 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title></title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
-        var baseURL = "https://swapi.co/api/";
-        var filter;
-        var url;
-        
-        $(document).ready(function() {
-            $("#vehicles").click(function(){
-                filter = "vehicles/"; 
-                url = baseURL + filter;
-                $.getJSON(url)
-                .done (function (data) {
-                  console.log(data);
-                  $.each(data.results, function(index, value){
-    					     var html = "<div><h1>" + "Vehicles" + "</h1>" + "<p>Name: " + value.name + "<br>" + "Model: " + value.model + "</p>" + "</div>";
-    					     $("p").append(html);
-                  });
-					      })
-			      });
-			      $("#starships").click(function(){
-                filter = "starships/"; 
-                url = baseURL + filter;
-                $.getJSON(url)
-    			  	  .done (function (data) {
-					    	  console.log(data);
-					    	  $.each(data.results, function(index, value){
-    					      var html = "<div><h1>" + "Starships" + "</h1>" + "<p>Name: " + value.name + "<br>" + "Model: " + value.model + "</p>" + "</div>";
-    							  $("body").append(html);
-    					    });
-					      })
-			      });
-			$("#species").click(function(){
-                filter = "species/"; 
-                url = baseURL + filter;
-                $.getJSON(url)
-    				.done (function (data) {
-						console.log(data);
-						
-    					$.each(data.results, function(index, value){
-    					    var html = "<div><h1>" + "Species" + "</h1>" + "<p>Name: " + value.name + "<br>" + "Model: " + value.model + "</p>" + "</div>";
-    							$("body").append(html);
-    					});
-					})
-			});
-			$("#planets").click(function(){
-                filter = "vehicles/"; 
-                url = baseURL + filter;
-                $.getJSON(url)
-    				.done (function (data) {
-						console.log(data);
-						
-    					$.each(data.results, function(index, value){
-    					    var html = "<div><h1>" + "Planets" + "</h1>" + "<p>Name: " + value.name + "<br>" + "Model: " + value.model + "</p>" + "</div>";
-    							$("body").append(html);
-    					});
-					})
-			});
-			$("#films").click(function(){
-                filter = "films/"; 
-                url = baseURL + filter;
-                $.getJSON(url).done (function (data) {
-						console.log(data);
-						
-    					$.each(data.results, function(index, value){
-    					    var html = "<div><h1>" + "Films" + "</h1>" + "<p>Name: " + value.name + "<br>" + "Model: " + value.model + "</p>" + "</div>";
-    							$("body").append(html);
-    					});
-					})
-			});
-			$("#characters").click(function(){
-                filter = "people/"; 
-                url = baseURL + filter;
-                $.getJSON(url).done (function (data) {
-						console.log(data);
-						
-    					$.each(data.results, function(index, value){
-    					    var html = "<div><h1>" + "People" + "</h1>" + "<p>Name: " + value.name + "<br>" + "Model: " + value.model + "</p>" + "</div>";
-    							$("body").append(html);
-    					});
-					})
-			});
+      var baseURL = "https://swapi.co/api/";
+      var filter;
+      var url;
+
+      $(document).ready(function() {
+        $("#vehicles").click(function() {
+          filter = "vehicles/";
+          url = baseURL + filter;
+          $.getJSON(url).done(function(data) {
+            console.log(data);
+            /*$.each(data.results, function(index, value) {
+              var html = "<div><h1>" + "Vehicles" + "</h1>" + "<p>Name: " + value.name + "<br>" + "Model: " + value.model + "</p>" + "</div>";
+              $("p").append(html);
+            });*/
+          });
         });
+      });
+      /*
+      $(document).ready(function() {
+        $("#vehicles").click(function() {
+          filter = "vehicles/";
+          url = baseURL + filter;
+          $.getJSON(url).done(function(data) {
+            console.log(data);
+            $.each(data.results, function(index, value) {
+              var html = "<div><h1>" + "Vehicles" + "</h1>" + "<p>Name: " + value.name + "<br>" + "Model: " + value.model + "</p>" + "</div>";
+              $("p").append(html);
+            });
+          })
+        });
+        $("#starships").click(function() {
+          filter = "starships/";
+          url = baseURL + filter;
+          $.getJSON(url).done(function(data) {
+            console.log(data);
+            $.each(data.results, function(index, value) {
+              var html = "<div><h1>" + "Starships" + "</h1>" + "<p>Name: " + value.name + "<br>" + "Model: " + value.model + "</p>" + "</div>";
+              $("body").append(html);
+            });
+          })
+        });
+        $("#species").click(function() {
+          filter = "species/";
+          url = baseURL + filter;
+          $.getJSON(url).done(function(data) {
+            console.log(data);
+            $.each(data.results, function(index, value) {
+              var html = "<div><h1>" + "Species" + "</h1>" + "<p>Name: " + value.name + "<br>" + "Model: " + value.model + "</p>" + "</div>";
+              $("body").append(html);
+            });
+          })
+        });
+        $("#planets").click(function() {
+          filter = "vehicles/";
+          url = baseURL + filter;
+          $.getJSON(url).done(function(data) {
+            console.log(data);
+            $.each(data.results, function(index, value) {
+              var html = "<div><h1>" + "Planets" + "</h1>" + "<p>Name: " + value.name + "<br>" + "Model: " + value.model + "</p>" + "</div>";
+              $("body").append(html);
+            });
+          })
+        });
+        $("#films").click(function() {
+          filter = "films/";
+          url = baseURL + filter;
+          $.getJSON(url).done(function(data) {
+            console.log(data);
+            $.each(data.results, function(index, value) {
+              var html = "<div><h1>" + "Films" + "</h1>" + "<p>Name: " + value.name + "<br>" + "Model: " + value.model + "</p>" + "</div>";
+              $("body").append(html);
+            });
+          })
+        });
+        $("#characters").click(function() {
+          filter = "people/";
+          url = baseURL + filter;
+          $.getJSON(url).done(function(data) {
+            console.log(data);
+            $.each(data.results, function(index, value) {
+              var html = "<div><h1>" + "People" + "</h1>" + "<p>Name: " + value.name + "<br>" + "Model: " + value.model + "</p>" + "</div>";
+              $("body").append(html);
+            });
+          })
+        });
+      });*/
     </script>
-</head>
-<body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-     <a class="navbar-brand" "font-family:ITC Serif Gothic;" href="#" id = "vehicles">May the M*A be with you  </a>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" "font-family:ITC Serif Gothic;" href="#" id="vehicles">May the M*A be with you  </a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">vehicles <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">name </a></li>
+              <li><a href="#">model</a></li>
+              <li><a href="#">vehicle class</a></li>
+            </ul>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">films  <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">title </a></li>
+                <li><a href="#">episode</a></li>
+                <li><a href="#">opening crawl </a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Planets  <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">name </a></li>
+                <li><a href="#">diameter </a></li>
+                <li><a href="#">gravity</a></li>
+              </ul>
+              <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Species  <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">name </a></li>
+                  <li><a href="#">classification </a></li>
+                  <li><a href="#">designation </a></li>
+                </ul>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Starships  <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">name </a></li>
+                    <li><a href="#">model</a></li>
+                    <li><a href="#">starship class</a></li>
+                  </ul>
+                  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Characters <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">name</a></li>
+                      <li><a href="#">birth year</a></li>
+                      <li><a href="#">gender </a></li>
+                    </ul>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h3></h3>
+      <p>.</p>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">vehicles <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">name </a></li>
-          <li><a href="#">model</a></li>
-          <li><a href="#">vehicle class</a></li>
-        </ul>
-           <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">films  <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">title </a></li>
-          <li><a href="#">episode</a></li>
-          <li><a href="#">opening crawl </a></li>
-        </ul>
-      </li>
-         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Planets  <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">name </a></li>
-          <li><a href="#">diameter </a></li>
-          <li><a href="#">gravity</a></li>
-        </ul>
-           <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Species  <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">name </a></li>
-          <li><a href="#">classification </a></li>
-          <li><a href="#">designation </a></li>
-        </ul>
-           <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Starships  <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">name </a></li>
-          <li><a href="#">model</a></li>
-          <li><a href="#">starship class</a></li>
-        </ul>
-           <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Characters <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">name</a></li>
-          <li><a href="#">birth year</a></li>
-          <li><a href="#">gender </a></li>
-        </ul>
-    </ul>
-  </div>
-</nav>
-  
-<div class="container">
-  <h3></h3>
-  <p>.</p>
-</div>
-<img src="http://i0.kym-cdn.com/photos/images/original/000/188/244/SAMPLE-SLIDES.168-e1308532399731.jpg" alt="Luke i am your Father " style="width:100%;">
-</body>
+    <img src="http://i0.kym-cdn.com/photos/images/original/000/188/244/SAMPLE-SLIDES.168-e1308532399731.jpg" alt="Luke i am your Father " style="width:100%;">
+  </body>
+
 </html>

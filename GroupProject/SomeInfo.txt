@@ -1,0 +1,19 @@
+Some links
+
+https://stackoverflow.com/questions/17384663/canvas-move-object-in-circle
+^ moving objects in a circle
+
+https://www.safaribooksonline.com/library/view/html5-canvas/9781449308032/ch05s03.html
+^ moving in circle, better version
+
+http://numbersapi.com/#100
+^ numbers
+
+https://catfact.ninja/#!/Cat_Facts/fact
+^ cats
+
+https://api.chucknorris.io/
+^ chuck
+
+https://www.programmableweb.com/api/dog-ceo-dog
+^ dogs
