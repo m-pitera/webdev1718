@@ -1,205 +1,29 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Rotating Circles</title>
-    <style>
-        html {
-            height: 100%;
-            width: 100%;
-        }
-    </style>
-    <script src="modernizr-1.6.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-        //Draws first red cirle
-        function drawRed() {
-            var Redcircle = { centerX: 700, centerY: 400, radius: 400, angle: 0 };
-            var ball = { x: 1100, y: 600 };
-
-            var theCanvas = document.getElementById("canvasOne");
-            var context = theCanvas.getContext("2d");
-            Redcircle.angle += ball.speed;
-
-            context.fillStyle = "red";
-            context.beginPath();
-            context.arc(ball.x, ball.y, 100, 0, Math.PI * 2, true);
-            context.closePath();
-            context.fill();
-
-        }
-        setInterval(drawRed, 10);
-
-        function drawGreen() {
-            var Greencircle = { centerX: 700, centerY: 400, radius: 400, angle: 0 };
-            var ball = { x: 300, y: 600 };
-
-            var theCanvas = document.getElementById("canvasOne");
-            var context = theCanvas.getContext("2d");
-            Greencircle.angle += ball.speed;
-
-            context.fillStyle = "green";
-            context.beginPath();
-            context.arc(ball.x, ball.y, 100, 0, Math.PI * 2, true);
-            context.closePath();
-            context.fill();
-
-        }
-        setInterval(drawGreen, 10);
-
-        function drawBlue() {
-            var Bluecircle = { centerX: 700, centerY: 400, radius: 400, angle: 0 };
-            var ball = { x: 300, y: 150 };
-
-            var theCanvas = document.getElementById("canvasOne");
-            var context = theCanvas.getContext("2d");
-            Bluecircle.angle += ball.speed;
-
-            context.fillStyle = "blue";
-            context.beginPath();
-            context.arc(ball.x, ball.y, 100, 0, Math.PI * 2, true);
-            context.closePath();
-            context.fill();
-
-        }
-        setInterval(drawBlue, 10);
-
-        function drawPurple() {
-            var Purplecircle = { centerX: 700, centerY: 400, radius: 400, angle: 0 };
-            var ball = { x: 1100, y: 150 };
-
-            var theCanvas = document.getElementById("canvasOne");
-            var context = theCanvas.getContext("2d");
-            Purplecircle.angle += ball.speed;
-
-            context.fillStyle = "purple";
-            context.beginPath();
-            context.arc(ball.x, ball.y, 100, 0, Math.PI * 2, true);
-            context.closePath();
-            context.fill();
-
-        }
-        setInterval(drawPurple, 10);
-
-        //rotating ball function
-        function canvasApp() {
-            function drawScreen() {
-                context.fillStyle = '#EEEEEE';
-                context.fillRect(0, 0, theCanvas.width, theCanvas.height);
-
-                context.strokeStyle = '#000000';
-                context.strokeRect(1, 1, theCanvas.width - 2, theCanvas.height - 2);
-
-                ball.x = Redcircle.centerX + Math.cos(Redcircle.angle) * Redcircle.radius;
-                ball.y = Redcircle.centerY + Math.sin(Redcircle.angle) * Redcircle.radius;
-
-                Redcircle.angle += ball.speed;
-
-                context.fillStyle = "red";
-                context.beginPath();
-                context.arc(ball.x, ball.y, 100, 0, Math.PI * 2, true);
-                context.closePath();
-                context.fill();
-
+    <head>
+        <title>Rotating Circles</title>
+        <style>
+            html {
+                height: 100%;
+                width: 100%;
             }
+        </style>
+        <!--<script src="modernizr-1.6.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-            var Redcircle = { centerX: 700, centerY: 400, radius: 400, angle: 0 };
-            var ball = { x: 1100, y: 600, speed: .01 };
+    </head>
 
-            var theCanvas = document.getElementById("canvasOne");
-            var context = theCanvas.getContext("2d");
-
-            setInterval(drawScreen, 33);
-
-        }
-
-        var numUrl;
-        var dogUrl;
-        var catUrl;
-        var chuckUrl;
-        var dogImg;
-
-        numUrl = "https://numbersapi.com/random/";
-        dogUrl = "https://dog.ceo/api/breeds/image/random";
-        catUrl = "https://catfact.ninja/fact";
-        chuckUrl = "https://api.chucknorris.io/jokes/random";
-
-        dogImg = document.createElement("img");
-
-        $(document).ready(function() {
-            console.log("doc ready");
-
-            //this makes doggo images appear
-            $("#doggoBtn").click(function() {
-                console.log("button clicked");
-
-                //fetches url, turns it to json,and pulls data
-                fetch(dogUrl).then((resp) => resp.json()).then(function(data) {
-
-                    //troubleshooting
-                    console.log(data);
-                    console.log(data.message);
-
-                    //appending the img to html
-                    dogImg.src = data.message;
-                    var src = document.getElementById("dogImg");
-                    src.appendChild(dogImg);
-                    //$('#number').text(data); just trouble shooting stuff
-                });
-            });
-
-            //this makes cat facts cat facts appear . . .
-            //except that it doesn't work cause we need to make a CORS request
-            $("#catBtn").click(function() {
-                console.log("button clicked");
-
-                //fetches url, turns it to json,and pulls data
-                //fetch(catUrl).then((resp) => resp.json()).then(function(data) {
-
-                $.get(catUrl, function(data) {
-
-                    //troubleshooting
-                    console.log(data);
-                    //console.log(data.message);
-
-                    //appending the text to html
-                    //var text = document.getElementById("dogImg");
-                    //text.appendChild(dogImg);
-                });
-            });
-
-            $("#chuckBtn").click(function() {
-                console.log("button clicked");
-
-                //fetches url, turns it to json,and pulls data
-                fetch(chuckUrl).then((resp) => resp.json()).then(function(data) {
-
-                    //troubleshooting
-                    console.log(data);
-                    console.log(data.value);
-
-                    //appending the text to html
-                    //var src = document.getElementById("dogImg");
-                    //src.appendChild(dogImg);
-                    $('#chuckTxt').text(data.value); //just trouble shooting stuff
-                });
-            });
-        });
-
-        $(function() {
-            $("#dogBreed").selectmenu();
-        });
-    </script>
-</head>
-
-<body>
-    <div>
-        <button onclick="canvasApp()">Click me</button>
-        <button id="doggoBtn">Doggo Plz</button>
-        <button id="catBtn">Cat Fact Plz</button>
-        <button id="chuckBtn">Chuck Joke Plz (Warning: Bad Jokes)</button>
-        <!--
+    <body>
+        <div>
+            <button onclick="drawScreen()">Click me</button>
+            <button onclick="drawBlue(), drawGreen(), drawPurple(), drawRed()">Click me plz</button>
+            <button id="doggoBtn">Doggo Plz</button>
+            <button id="catBtn">Cat Fact Plz</button>
+            <button id="catBtn2">Cat Image Plz</button>
+            <button id="chuckBtn">Chuck Joke Plz (Warning: Bad Jokes)</button>
+            <!--
         <form action="#">
             <fieldset>
                 <label for="dogBreed">Select a title</label>
@@ -214,15 +38,225 @@
             </fieldset>
         </form>
         -->
-        <div id="chuckTxt">Chuck Fact: </div>
-        <div id="dogImg"></div>
+            <div id="chuckTxt">Chuck Joke: </div>
+            <div id="dogImg"></div>
+            <div id="catImg"></div>
 
-        <canvas id="canvasOne" width="1500" height="800" style="border:6px solid #c3c3c3; margin: 0 auto; display: block; background: #eee">
             <button style="position: absolute; top:200px; left:20px;" onclick="myFunction()">Click</button>
-        </canvas>
-    </div>
+
+        </div>
+
+        <canvas id="canvasOne" width="1500" height="800" style="border:6px solid #c3c3c3; margin: 0 auto; display: block; background: #eee"></canvas>
+
+        <script type="text/javascript">
+            // this initializes out canvas
+            var theCanvas = document.getElementById("canvasOne");
+            var context = theCanvas.getContext("2d");
 
 
-</body>
+            var redCircle = { centerX: 700, centerY: 400, radius: 400, angle: 90 };
+            var greenCircle = { centerX: 700, centerY: 400, radius: 400, angle: 25 };
+            var blueCircle = { centerX: 700, centerY: 400, radius: 400, angle: 110 };
+            var purpleCircle = { centerX: 700, centerY: 400, radius: 400, angle: 50 };
+
+
+            var blueBall = { x: 300, y: 150, speed: .01 };
+            var redBall = { x: 1100, y: 600, speed: .01 };
+            var greenBall = { x: 300, y: 600, speed: .01 };
+            var purpleBall = { x: 1100, y: 150, speed: .01 };
+
+            //Draws first red cirle
+            function drawRed() {
+                context.fillStyle = '#EEEEEE';
+                context.fillRect(0, 0, theCanvas.width, theCanvas.height);
+
+                context.strokeStyle = '#000000';
+                context.strokeRect(1, 1, theCanvas.width - 2, theCanvas.height - 2);
+
+                redBall.x = redCircle.centerX + Math.cos(redCircle.angle) * redCircle.radius;
+                redBall.y = redCircle.centerY + Math.sin(redCircle.angle) * redCircle.radius;
+
+                redCircle.angle += redBall.speed;
+
+                context.fillStyle = "red";
+                context.beginPath();
+                context.arc(redBall.x, redBall.y, 100, 0, Math.PI * 2, true);
+                context.closePath();
+                context.fill();
+            }
+            //setInterval(drawRed);
+
+            function drawGreen() {
+                context.fillStyle = '#EEEEEE';
+                context.fillRect(0, 0, theCanvas.width, theCanvas.height);
+
+                context.strokeStyle = '#000000';
+                context.strokeRect(1, 1, theCanvas.width - 2, theCanvas.height - 2);
+
+                greenBall.x = greenCircle.centerX + Math.cos(greenCircle.angle) * greenCircle.radius;
+                greenBall.y = greenCircle.centerY + Math.sin(redCircle.angle) * greenCircle.radius;
+
+                greenCircle.angle += greenBall.speed;
+
+                context.fillStyle = "green";
+                context.beginPath();
+                context.arc(greenBall.x, greenBall.y, 100, 0, Math.PI * 2, true);
+                context.closePath();
+                context.fill();
+            }
+            //setInterval(drawGreen);
+
+            function drawBlue() {
+                context.fillStyle = '#EEEEEE';
+                context.fillRect(0, 0, theCanvas.width, theCanvas.height);
+
+                context.strokeStyle = '#000000';
+                context.strokeRect(1, 1, theCanvas.width - 2, theCanvas.height - 2);
+
+                blueBall.x = blueCircle.centerX + Math.cos(blueCircle.angle) * blueCircle.radius;
+                blueBall.y = blueCircle.centerY + Math.sin(blueCircle.angle) * blueCircle.radius;
+
+                blueCircle.angle += blueBall.speed;
+
+                context.fillStyle = "blue";
+                context.beginPath();
+                context.arc(blueBall.x, blueBall.y, 100, 0, Math.PI * 2, true);
+                context.closePath();
+                context.fill();
+            }
+            //setInterval(drawBlue, 10);
+
+            function drawPurple() {
+                context.fillStyle = '#EEEEEE';
+                context.fillRect(0, 0, theCanvas.width, theCanvas.height);
+
+                context.strokeStyle = '#000000';
+                context.strokeRect(1, 1, theCanvas.width - 2, theCanvas.height - 2);
+
+                purpleBall.x = purpleCircle.centerX + Math.cos(purpleCircle.angle) * purpleCircle.radius;
+                purpleBall.y = purpleCircle.centerY + Math.sin(purpleCircle.angle) * purpleCircle.radius;
+
+                purpleCircle.angle += purpleBall.speed;
+
+                context.fillStyle = "purple";
+                context.beginPath();
+                context.arc(purpleBall.x, purpleBall.y, 100, 0, Math.PI * 2, true);
+                context.closePath();
+                context.fill();
+            }
+            //setInterval(drawPurple);
+
+            function drawScreen() {
+                setInterval(drawRed, 20);
+                setInterval(drawGreen, 22);
+
+            }
+            //setInterval(drawScreen1, 20);
+
+
+
+
+
+            var numUrl;
+            var dogUrl;
+            var catUrl;
+            var catUrl2;
+            var chuckUrl;
+            var dogImg;
+            var catImg;
+
+            numUrl = "https://numbersapi.com/random/";
+            dogUrl = "https://dog.ceo/api/breeds/image/random";
+            catUrl = "https://catfact.ninja/fact";
+            catUrl2 = "https://thecatapi.com/api/images/get?format=xml";
+            chuckUrl = "https://api.chucknorris.io/jokes/random";
+
+            dogImg = document.createElement("img");
+
+            $(document).ready(function() {
+                console.log("doc ready");
+
+                //this makes doggo images appear
+                $("#doggoBtn").click(function() {
+                    console.log("button clicked");
+
+                    //fetches url, turns it to json,and pulls data
+                    fetch(dogUrl).then((resp) => resp.json()).then(function(data) {
+
+                        //troubleshooting
+                        console.log(data);
+                        console.log(data.message);
+
+                        //appending the img to html
+                        dogImg.src = data.message;
+                        var src = document.getElementById("dogImg");
+                        src.appendChild(dogImg);
+                        //$('#number').text(data); just trouble shooting stuff
+                    });
+                });
+
+                //this makes cat facts cat facts appear . . .
+                //except that it doesn't work cause we need to make a CORS request
+                $("#catBtn").click(function() {
+                    console.log("button clicked");
+
+                    //fetches url, turns it to json,and pulls data
+                    //fetch(catUrl).then((resp) => resp.json()).then(function(data) {
+
+                    $.get(catUrl, function(data) {
+
+                        //troubleshooting
+                        console.log(data);
+                        //console.log(data.message);
+
+                        //appending the text to html
+                        //var text = document.getElementById("dogImg");
+                        //text.appendChild(dogImg);
+                    });
+                });
+
+                //attempt #2 at Cat Pulls
+                $("#catBtn2").click(function() {
+                    console.log("button clicked");
+
+                    //fetches url, turns it to json,and pulls data
+                    fetch(catUrl2).then((resp) => resp.json()).then(function(data) {
+
+                        //troubleshooting
+                        console.log(data);
+                        //console.log(data.message);
+
+                        //appending the img to html
+                        //catImg.src = data.message;
+                        //var src = document.getElementById("catImg");
+                        //src.appendChild(catImg);
+                    });
+                });
+
+                $("#chuckBtn").click(function() {
+                    console.log("button clicked");
+
+                    //fetches url, turns it to json,and pulls data
+                    fetch(chuckUrl).then((resp) => resp.json()).then(function(data) {
+
+                        //troubleshooting
+                        console.log(data);
+                        console.log(data.value);
+
+                        //appending the text to html
+                        //var src = document.getElementById("dogImg");
+                        //src.appendChild(dogImg);
+                        $('#chuckTxt').text(data.value); //just trouble shooting stuff
+                    });
+                });
+            });
+
+            //$(function() {
+            //    $("#dogBreed").selectmenu();
+            //});
+        </script>
+
+
+    </body>
 
 </html>
