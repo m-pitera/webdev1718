@@ -38,13 +38,8 @@ $(document).ready(function() {
 
 /* ************************** Cat API ************************** */
 
-//API Key: MzA2MjEy
-//http://thecatapi.com/api/images/get?format=xml
-//http://thecatapi.com/docs.html
-
-
 //https://catfact.ninja/#!/Cat_Facts/fact
-/*
+
 var catUrl = "https://catfact.ninja/fact";
 
 $(document).ready(function() {
@@ -55,7 +50,6 @@ $(document).ready(function() {
         });
     });
 });
-*/
 
 
 /* ************************** Chuck API ************************** */

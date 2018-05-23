@@ -17,6 +17,3 @@ https://api.chucknorris.io/
 
 https://www.programmableweb.com/api/dog-ceo-dog
 ^ dogs
-
-http://shibe.online/api/shibes?count=[1]&urls=[true]&httpsUrls=[true]
-^ shibes POGGERS
