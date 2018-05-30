@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title> </title>
+    </head>
+
+    <body>
+
+    </body>
+    <script>
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', deviceOrientationHandler, false);
+            document.getElementById("doeSupported").innerText = "Supported!";
+        }
+    </script>
+
+</html>
