@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.eWKtFEKYdfw.O/m=auth/exm=plusone/rt=j/sv=1/d=1/ed=1/am=QQE/rs=AGLTcCPx2P2223oQqo0S5XtEKpm7fnFojg/cb=gapi.loaded_1" async=""></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="jquery-3.3.1.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.eWKtFEKYdfw.O/m=auth/exm=plusone/rt=j/sv=1/d=1/ed=1/am=QQE/rs=AGLTcCPx2P2223oQqo0S5XtEKpm7fnFojg/cb=gapi.loaded_1" async=""></script>
+    </head>
+
+    <body>
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Marcin Pitera</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <video id="player" controls autoplay></video>
+            </div>
+        </div>
+        </br>
+        <div class="row">
+            <div class="col-sm-1">
+                <button id="capture">Capture</button>
+            </div>
+            <div class="col-sm-2">
+                <button id="goFS">Go fullscreen</button>
+            </div>
+            <div class="col-sm-4">
+                My Number, don't call me xP
+                <a href="tel:+1-773-948-0183">+1 (77) 948-0183</a>
+            </div>
+            <div class="col-sm-4">
+                Lane Tech
+                <a href="tel:+1-773-534-5400">+1 (773) 534-5400</a>
+            </div>
+        </div>
+        </br>
+
+        <div id="savedImg"></div>
+        <script>
+            var player = document.getElementById('player');
+            var captureButton = document.getElementById('capture');
+
+            var constraints = {
+                video: true,
+            };
+            var canNum = 0;
+
+            captureButton.addEventListener('click', () => {
+                $("#savedImg").append("<canvas id='canNum" + canNum + "'width=320 height=240></canvas>")
+                var canvas = document.getElementById('canNum' + canNum);
+                var context = canvas.getContext("2d");
+                context.drawImage(player, 0, 0, canvas.width, canvas.height);
+                canNum++;
+            });
+
+            navigator.mediaDevices.getUserMedia(constraints)
+                .then((stream) => {
+                    player.srcObject = stream;
+                });
+        </script>
+        <style>
+            /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+            #map {
+                height: 100%;
+            }
+
+            /* Optional: Makes the sample page fill the window. */
+
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <div id="map"></div>
+        <script>
+            var map;
+
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 10,
+                    center: new google.maps.LatLng(41.8781, -87.6298),
+                    mapTypeId: 'terrain'
+                });
+
+                infoWindow = new google.maps.InfoWindow;
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        //infoWindow.setPosition(pos);
+                        //infoWindow.setContent('Location found.');
+                        //infoWindow.open(map);
+                        map.setCenter(pos);
+                        var marker = new google.maps.Marker({ position: pos, map: map });
+                    }, function() {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    });
+                }
+                else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, infoWindow, map.getCenter());
+                }
+            }
+
+            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                infoWindow.setPosition(pos);
+                infoWindow.setContent(browserHasGeolocation ?
+                    'Error: The Geolocation service failed.' :
+                    'Error: Your browser doesn\'t support geolocation.');
+                infoWindow.open(map);
+            }
+        </script>
+
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZIMfRVApH7LSKKcbcfPP767LOSaMoqyg&callback=initMap"></script>
+
+        <div id="savedImgs"></div>
+        <img style="visibility:hidden" id="glasses" src="glasses.png" alt="imgNotFound">
+    </body>
+
+</html>
